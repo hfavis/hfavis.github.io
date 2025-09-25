@@ -551,7 +551,171 @@
                 grid-template-columns: 1fr;
             }
         }
-    </style>
+
+        .portfolio-item {
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item.hidden {
+            display: none;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .portfolio-item.visible {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+
+        /* Simple Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 2001;
+        }
+
+        .lightbox-close:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+
+        /* Make portfolio items clickable */
+        .portfolio-item {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsive lightbox */
+        @media (max-width: 768px) {
+            .lightbox-close {
+                top: 10px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+                font-size: 1.2rem;
+            }
+            
+            .lightbox-content {
+                max-width: 95%;
+                max-height: 95%;
+            }
+        }
+
+        /* Contact Form Styles */
+        .form-group {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-input.error {
+            border-color: var(--accent);
+        }
+
+        .form-input.success {
+            border-color: #2ecc71;
+        }
+
+        .loading-spinner {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .validation-error {
+            color: var(--accent);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .btn:disabled:hover {
+            background: var(--secondary);
+        }
+
+
+</style>
 </head>
 <body>
     <!-- Header -->
@@ -604,6 +768,8 @@
                         <span class="skill">HTML</span>
                         <span class="skill">WordPress</span>
                         <span class="skill">Adobe InDesign</span>
+                        <span class="skill">Adobe Illustrator</span>
+                        <span class="skill">Adobe Photoshop</span>
                         <span class="skill">Graphic Design</span>
                         <span class="skill">Digital Marketing</span>
                         <span class="skill">Social Media Marketing</span>
@@ -1007,78 +1173,86 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h3>Email</h3>
-                            <p>hfavis@yahoo.com</p>
-                        </div>
+<!-- Contact Section -->
+<section class="section contact" id="contact">
+    <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
                     </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div>
-                            <h3>Phone</h3>
-                            <p>+9452097183</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div>
-                            <h3>Location</h3>
-                            <p>Marikina, Metro Manila, Philippines</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fab fa-linkedin"></i>
-                        </div>
-                        <div>
-                            <h3>LinkedIn</h3>
-                            <p><a href="https://www.linkedin.com/in/heherson-favis/" target="_blank">linkedin.com/in/heherson-favis</a></p>
-                        </div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>hfavis@yahoo.com</p>
                     </div>
                 </div>
                 
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-input" placeholder="Your Name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="email" class="form-input" placeholder="Your Email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" class="form-input" placeholder="Subject">
-                        </div>
-                        
-                        <div class="form-group">
-                            <textarea class="form-input" placeholder="Your Message" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h3>Phone</h3>
+                        <p>+639452097183</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h3>Location</h3>
+                        <p>Marikina, Metro Manila, Philippines</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <div>
+                        <h3>LinkedIn</h3>
+                        <p><a href="https://www.linkedin.com/in/heherson-favis/" target="_blank">linkedin.com/in/heherson-favis</a></p>
+                    </div>
                 </div>
             </div>
+            
+            <div class="contact-form">
+                <!-- Replace {your-form-id} with your actual Formspree form ID -->
+                <form id="contactForm" action="https://formspree.io/f/xwprpldy" method="POST">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-input" placeholder="Your Name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-input" placeholder="Your Email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" name="subject" class="form-input" placeholder="Subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea name="message" class="form-input" placeholder="Your Message" required minlength="10"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="submitBtn">
+                        <span class="btn-text">Send Message</span>
+                        <div class="loading-spinner" style="display: none;">
+                            <i class="fas fa-spinner fa-spin"></i> Sending...
+                        </div>
+                    </button>
+                    
+                    <div id="formMessage" style="display: none; margin-top: 1rem; padding: 1rem; border-radius: 5px;"></div>
+                </form>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer>
@@ -1120,6 +1294,18 @@
         </div>
     </footer>
 
+
+    <!-- Simple Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-img" id="lightbox-img">
+        </div>
+    </div>
+
+
     <script>
         // Mobile Menu Toggle
         const hamburger = document.getElementById('hamburger');
@@ -1136,20 +1322,319 @@
             });
         });
         
-        // Portfolio Filter (simple implementation)
-        const filterButtons = document.querySelectorAll('.filter-btn');
+// Simple Portfolio Filter with Lightbox
+const filterButtons = document.querySelectorAll('.filter-btn');
+const portfolioGrid = document.querySelector('.portfolio-grid');
+
+// Lightbox elements
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxClose = document.getElementById('lightbox-close');
+
+// Function to shuffle array (Fisher-Yates algorithm)
+function shuffleArray(array) {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+}
+
+// Function to rearrange portfolio items randomly
+function shufflePortfolioItems() {
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    const itemsArray = Array.from(portfolioItems);
+    const shuffledItems = shuffleArray(itemsArray);
+    
+    // Clear the grid and append shuffled items
+    portfolioGrid.innerHTML = '';
+    shuffledItems.forEach(item => {
+        portfolioGrid.appendChild(item);
+    });
+}
+
+// Function to filter portfolio by category
+function filterPortfolio(category) {
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    portfolioItems.forEach(item => {
+        const itemCategory = item.querySelector('.portfolio-category').textContent.trim();
         
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Remove active class from all buttons
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                
-                // Add active class to clicked button
-                button.classList.add('active');
-                
-                // In a real implementation, you would filter the portfolio items here
-            });
+        if (category === 'All' || itemCategory.includes(category)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+// Lightbox functions
+function openLightbox(imgSrc) {
+    lightboxImg.src = imgSrc;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+}
+
+// Initialize event listeners
+function initPortfolio() {
+    // Filter buttons
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            const filterValue = button.textContent.trim();
+            
+            if (filterValue === 'All') {
+                shufflePortfolioItems();
+                filterPortfolio('All');
+            } else {
+                filterPortfolio(filterValue);
+            }
+            
+            // Re-attach click events to new items
+            setTimeout(attachClickEvents, 100);
         });
-    </script>
+    });
+    
+    // Lightbox events
+    lightboxClose.addEventListener('click', closeLightbox);
+    
+    // Close lightbox on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLightbox();
+    });
+    
+    // Close lightbox when clicking on background
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+    
+    // Attach click events to portfolio items
+    attachClickEvents();
+}
+
+function attachClickEvents() {
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    portfolioItems.forEach(item => {
+        // Remove existing event listeners to avoid duplicates
+        const newItem = item.cloneNode(true);
+        item.parentNode.replaceChild(newItem, item);
+    });
+    
+    // Get fresh references after cloning
+    const freshPortfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    freshPortfolioItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const imgSrc = this.querySelector('.portfolio-img').src;
+            openLightbox(imgSrc);
+        });
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
+    
+    // Close menu when clicking on a nav link
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+    });
+    
+    // Initialize portfolio
+    shufflePortfolioItems();
+    initPortfolio();
+});
+
+// Contact Form Functionality
+function initContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    if (!contactForm) return; // Safety check
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const loadingSpinner = submitBtn.querySelector('.loading-spinner');
+    const formMessage = document.getElementById('formMessage');
+
+    // Form validation
+    function validateForm() {
+        let isValid = true;
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        
+        inputs.forEach(input => {
+            // Remove existing error messages
+            const existingError = input.parentNode.querySelector('.validation-error');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            // Remove error class
+            input.classList.remove('error');
+            
+            // Validate required fields
+            if (input.hasAttribute('required') && !input.value.trim()) {
+                showFieldError(input, 'This field is required');
+                isValid = false;
+            }
+            
+            // Validate email format
+            if (input.type === 'email' && input.value.trim()) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(input.value)) {
+                    showFieldError(input, 'Please enter a valid email address');
+                    isValid = false;
+                }
+            }
+            
+            // Validate message length
+            if (input.name === 'message' && input.value.trim().length < 10) {
+                showFieldError(input, 'Message must be at least 10 characters long');
+                isValid = false;
+            }
+        });
+        
+        return isValid;
+    }
+
+    function showFieldError(input, message) {
+        input.classList.add('error');
+        const errorElement = document.createElement('span');
+        errorElement.className = 'validation-error';
+        errorElement.textContent = message;
+        input.parentNode.appendChild(errorElement);
+    }
+
+    function showMessage(message, type) {
+        formMessage.textContent = message;
+        formMessage.className = type + '-message';
+        formMessage.style.display = 'block';
+        
+        // Scroll to message
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Hide message after 5 seconds
+        setTimeout(() => {
+            formMessage.style.display = 'none';
+        }, 5000);
+    }
+
+    function setLoadingState(loading) {
+        if (loading) {
+            btnText.style.display = 'none';
+            loadingSpinner.style.display = 'flex';
+            submitBtn.disabled = true;
+        } else {
+            btnText.style.display = 'block';
+            loadingSpinner.style.display = 'none';
+            submitBtn.disabled = false;
+        }
+    }
+
+    // Form submission handler
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        if (!validateForm()) {
+            return;
+        }
+        
+        setLoadingState(true);
+        formMessage.style.display = 'none';
+
+        try {
+            const formData = new FormData(contactForm);
+            
+            // Test with a simple fetch first
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                showMessage('Thank you! Your message has been sent successfully. I will get back to you soon.', 'success');
+                contactForm.reset();
+            } else {
+                throw new Error('Failed to send message');
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            showMessage('Sorry, there was an error sending your message. Please try again or email me directly at hfavis@yahoo.com', 'error');
+        } finally {
+            setLoadingState(false);
+        }
+    });
+
+    // Real-time validation
+    const inputs = contactForm.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('blur', () => {
+            if (input.value.trim()) {
+                validateForm();
+            }
+        });
+        
+        input.addEventListener('input', () => {
+            // Clear error state when user starts typing
+            if (input.classList.contains('error')) {
+                input.classList.remove('error');
+                const errorElement = input.parentNode.querySelector('.validation-error');
+                if (errorElement) {
+                    errorElement.remove();
+                }
+            }
+        });
+    });
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu functionality
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    }
+    
+    // Close menu when clicking on a nav link
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navMenu) navMenu.classList.remove('active');
+        });
+    });
+    
+    // Initialize portfolio
+    shufflePortfolioItems();
+    initPortfolio();
+    
+    // Initialize contact form
+    initContactForm();
+});
+
+</script>
+
 </body>
 </html>
